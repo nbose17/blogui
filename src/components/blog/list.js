@@ -14,9 +14,15 @@ const List = () => {
   //   };
 
   useEffect(() => {
-    blogList().then((response) => {
-      setList(response.data?.data);
-    });
+    blogList()
+      .then((response) => {
+        setList(response.data?.data);
+      })
+      .catch((error) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isAuthenticated");
+        window.location.href = "/login";
+      });
   }, []);
 
   const deleteBlog = (id) => {
@@ -101,13 +107,13 @@ const List = () => {
               <Card
                 className="loginCard my-3"
                 actions={[
-                  <a href={`/blog/view/${item._id}`}>
+                  <a href={`/blog/view/${item.id}`}>
                     <EyeOutlined key="view" />
                   </a>,
-                  <a href={`/blog/edit/${item._id}`}>
+                  <a href={`/blog/edit/${item.id}`}>
                     <EditOutlined key="edit" />
                   </a>,
-                  <a onClick={() => deleteBlog(item?._id)}>
+                  <a onClick={() => deleteBlog(item?.id)}>
                     <DeleteOutlined key="delete" />
                   </a>,
                 ]}
@@ -117,7 +123,7 @@ const List = () => {
                   style={{ textAlign: "left" }}
                 />
                 <p className="m-0 mt-3" style={{ textAlign: "left" }}>
-                  Author : {item.author?.full_name || "N/A"}
+                  Author : {item.author_name || "N/A"}
                 </p>
                 <p className="m-0" style={{ textAlign: "left" }}>
                   Published on :{" "}

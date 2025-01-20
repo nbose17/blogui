@@ -87,7 +87,7 @@ const Edit = () => {
             >
               <p className="my-0 mt-3">
                 <b> Author: </b>
-                {details?.author?.full_name}
+                {details?.author_name}
               </p>
               <p className="my-0 mt-3">
                 <b> Updated At: </b>

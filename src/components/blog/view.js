@@ -23,6 +23,22 @@ const View = () => {
         <Card title={details.title}>
           {/* <h2 className="mb-5">Title {}</h2> */}
           <p dangerouslySetInnerHTML={{ __html: details.message }} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <p className="my-0 mt-3">
+              <b> Author: </b>
+              {details?.author_name}
+            </p>
+            <p className="my-0 mt-3">
+              <b> Updated At: </b>
+              {moment(details.updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
+            </p>
+          </div>
           <Button onClick={() => (window.location.href = "/blog/list")}>
             Back
           </Button>
